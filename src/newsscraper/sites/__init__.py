@@ -1,0 +1,1 @@
+"""Per-outlet site adapters."""

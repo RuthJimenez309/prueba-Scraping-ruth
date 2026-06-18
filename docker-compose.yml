@@ -1,0 +1,21 @@
+# Convenience runner. Usage:
+#   docker compose build
+#   docker compose run --rm scraper elecciones
+#   docker compose run --rm scraper mundial --site elheraldo --max-articles 30
+#
+# Output files appear in ./data on the host.
+services:
+  scraper:
+    build: .
+    image: newsscraper:latest
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      NEWSSCRAPER_OUTPUT_DIR: /app/data
+    volumes:
+      - ./data:/app/data
+    # Keep STDIN open so the interactive keyword prompt works when no keyword
+    # is passed on the command line.
+    stdin_open: true
+    tty: true
